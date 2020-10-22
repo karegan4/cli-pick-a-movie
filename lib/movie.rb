@@ -2,18 +2,27 @@ class Movie
 
     @@all = []
 
-    attr_accessor :genre
-def initialize(genre)
-    @genre = genre
-    @@all << self
-end
+    attr_accessor :title, :movie_page_url
 
-def self.all
-    @@all
-end
+    def initialize(title, movie_page_url)
+        @title = title
+        @movie_page_url = movie_page_url
+        @@all << self
+    end
+    
+    def self.all
+        @@all
+    end
 
-#def print_movie
-#    puts "-------"
-#    puts "Genre: #{genre}"
-#end
+    def self.find_or_create_by_name(title, movie_page_url)
+        found_title = self.all.find do |title|
+            title.title == title
+        end
+        if found_title
+            return found_title
+        else
+            return self.new(title, movie_page_url)
+        end
+    end
+
 end
