@@ -13,20 +13,32 @@ class CLI
        "
         sleep (1)
         puts "Loading..."
-        Scraper.new.first_scrape
+        Scraper.first_scrape
         puts "Done!"
         Genre.print_all_genres
         puts "Which genre of movie would you like to watch?"
         puts "Please type a number."
         puts "Type 'Q' to quit."
-       input = gets.strip
+        input = gets.strip
+
+        int = input.to_i
+
        #GET THIS TO WORK:
-        genre = Genre.all[2]
+        genre = Genre.all[int-1]
+        
+        if int.between?(1, 21)
+            Scraper.second_scrape(genre)
+            Movie.print_all_titles
+            
+
+        elsif !int.between?(1, 21)
+            puts "Please select a number between 1 and 21."
+        end
         #binding.pry
-        Scraper.new.second_scrape(genre)
+        
     end
         
-    #    genre.display_movies
+    #    
         # if input == "1"
 
         #     def action_menu

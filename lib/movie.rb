@@ -4,6 +4,7 @@ class Movie
 
     attr_accessor :title, :movie_page_url
 
+
     def initialize(title, movie_page_url)
         @title = title
         @movie_page_url = movie_page_url
@@ -13,6 +14,7 @@ class Movie
     def self.all
         @@all
     end
+
 
     def self.find_or_create_by_name(title, movie_page_url)
         found_title = self.all.find do |title|
@@ -24,5 +26,12 @@ class Movie
             return self.new(title, movie_page_url)
         end
     end
+
+    def self.print_all_titles
+        Movie.all.each_with_index do |title, index|
+            puts "#{index + 1}. - #{title.title}"
+        end
+    end
+   # binding.pry
 
 end

@@ -5,41 +5,38 @@ require 'pry'
 #2. Then write a second scraper method that accepts an argument of a Genre instance, uses the assocaited movie_page_url (or whatvever you end up calling it) to scrape all the movies for that Genre. Grab the title and description and make new movie instances (don't forget to associate those new movie instances with the instance of the Genre that got passed in)
 #3. Make what we wrote in the CLI class work 
 
-
-
-
 class Scraper
 
-    def initialize
-        @base_url = "https://imdb.com"
-    end
+    
+    @@base_url = "https://imdb.com"
+    
 
-    def first_scrape
-       html = open(@base_url + "/chart/top/")
+    def self.first_scrape
+       html = open(@@base_url + "/chart/top/")
         html_parsed_to_elements = Nokogiri::HTML(html)
         genre_elements = html_parsed_to_elements.css('.subnav_item_main')
         genre_elements.each do |movie_genre|
 
             genre_name = movie_genre.css("a").text.strip
-            genre_url = movie_genre.css("a")[0].attr("href")
+            genre_url = movie_genre.css("a").attr("href").text
         
             genre = Genre.find_or_create_by_name(genre_name, genre_url)
 
-           # movie = Movie.new(title)
         end
         #binding.pry
     end
-    def second_scrape (genre)
-        movie_page_url = open(@base_url + genre.genre_url)
+
+    def self.second_scrape (genre)
+        movie_page_url = open(@@base_url + "#{genre.url}")
         movie_page_url_parsed_to_elements = Nokogiri::HTML(movie_page_url)
-        movie_titles = html_parsed_to_elements.css('.lister')
+        movie_titles = movie_page_url_parsed_to_elements.css('.lister-item')
 
         movie_titles.each do |movie_title|
             title = movie_title.css("h3 a").text
 
             movie = Movie.find_or_create_by_name(title, movie_page_url)
         end
-        binding.pry
+        
         
     end
 end
