@@ -34,7 +34,4 @@ class Movie
     end
 
 
-    
-    #binding.pry
-
 end
