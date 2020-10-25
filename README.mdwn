@@ -1,10 +1,10 @@
-##Pick-a-Movie App 
+## Pick-a-Movie App 
 This is a CLI program designed to retrieve a movie genres, movie titles of each genre, and movie information from each movie title. 
 
-##Installation:
+## Installation:
 In your terminal, type:
 ruby bin/run.rb
 to run this file.
 
-##Contributing
+## Contributing
 Bug reports and pull requests are welcome on Github.com at https://github.com/karegan4/cli-pick-a-movie
