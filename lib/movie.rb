@@ -32,6 +32,9 @@ class Movie
             puts "#{index + 1}. - #{title.title}"
         end
     end
-   # binding.pry
+
+
+    
+    #binding.pry
 
 end

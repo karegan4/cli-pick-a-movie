@@ -3,6 +3,18 @@ class CLI
     #Make instance of application here
 
     def run
+
+        def main_menu
+            puts "Type 'Q' to quit."
+            input = gets.strip
+            if input == "Q"
+                puts "Thank you for using Pick-a-Movie!"
+            end
+        end
+
+
+
+
         puts "Welcome to the"
         puts "
         +-+-+-+-+-+-+-+-+-+-+-+-+
@@ -17,26 +29,43 @@ class CLI
         puts "Done!"
         Genre.print_all_genres
         puts "Which genre of movie would you like to watch?"
-        puts "Please type a number."
-        puts "Type 'Q' to quit."
+        puts "Please type a number (1-21)."
         input = gets.strip
 
         int = input.to_i
 
-       #GET THIS TO WORK:
-        genre = Genre.all[int-1]
-        
         if int.between?(1, 21)
+            genre = Genre.all[int-1]
             Scraper.second_scrape(genre)
+            movie = Movie.all[int-1]
             Movie.print_all_titles
-            
+            puts ""
+            puts "Which movie would you like to know more about?"
+            input = gets.strip
+            int = input.to_i
+            #binding.pry
+
+            if int.between?(1, Movie.all.length)
+                Scraper.third_scrape(genre)
+                descr = Description.all[int-1]
+                #binding.pry
+                puts "#{descr.description}"
+
+                main_menu
+                
+                #binding.pry
+            elsif !int.between?(1, Movie.all.length)
+                main_menu
+            end
+
 
         elsif !int.between?(1, 21)
-            puts "Please select a number between 1 and 21."
+            main_menu
         end
         #binding.pry
         
     end
+end
         
     #    
         # if input == "1"
@@ -183,5 +212,3 @@ class CLI
     #     end
 
     # end
-
-end

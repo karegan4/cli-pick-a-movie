@@ -25,7 +25,7 @@ class Genre
     end
 
     def self.print_all_genres
-        Genre.all.each_with_index do |genre, index| 
+        Genre.all.each_with_index do |genre, index|
             puts "#{index + 1}. - #{genre.name}"
         end
     end
