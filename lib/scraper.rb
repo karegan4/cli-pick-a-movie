@@ -28,11 +28,12 @@ class Scraper
         movie_titles.each do |movie_title|
             title = movie_title.css("h3 a").text
 
-            movie = Movie.find_or_create_by_name(title, movie_page_url)
+            movie = Title.find_or_create_by_name(title, movie_page_url)
         end
 
         movie_titles.each do |describe|
             description = describe.css("p.text-muted[4]").text.strip
+            
             desc = Description.find_or_create_by_name(description)
         end
         

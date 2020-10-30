@@ -23,9 +23,4 @@ class Description
         end
     end
 
-    def print_descriptions
-        Description.all.each do |description|
-            puts "#{description.description}"
-        end
-    end
 end
